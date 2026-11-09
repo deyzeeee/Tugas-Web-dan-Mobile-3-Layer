@@ -1,5 +1,5 @@
 // Frontend berkomunikasi dengan REST API backend. Jangan akses database langsung dari browser.
-const API_URL = "backend/api.php";
+const API_URL = window.location.pathname.includes("/frontend/") ? "../backend/api.php" : "backend/api.php";
 
 async function apiRequest(method = "GET", params = {}, body = null) {
   const url = new URL(API_URL, window.location.href);
@@ -39,9 +39,9 @@ async function loadHomeCustomers(search = "") {
     if (!customers.length) {
       const tr = document.createElement("tr"), td = safeCell("Data pelanggan tidak ditemukan.");
       td.colSpan = 5; tr.append(td); tbody.append(tr);
-    } else customers.forEach(c => {
+    } else customers.forEach((c, index) => {
       const tr = document.createElement("tr");
-      [c.id,c.nama,c.telepon,c.email,c.alamat].forEach(v => tr.append(safeCell(v)));
+      [index + 1, c.nama, c.telepon, c.email, c.alamat].forEach(v => tr.append(safeCell(v)));
       tbody.append(tr);
     });
     showMessage("homeMessage", `${customers.length} data ditemukan.`);
@@ -60,12 +60,12 @@ async function loadManageCustomers(search = "") {
     if (!customers.length) {
       const tr = document.createElement("tr"), td = safeCell("Belum ada data pelanggan.");
       td.colSpan = 6; tr.append(td); tbody.append(tr);
-    } else customers.forEach(c => {
+    } else customers.forEach((c, index) => {
       const tr = document.createElement("tr");
-      [c.id,c.nama,c.telepon,c.email,c.alamat].forEach(v => tr.append(safeCell(v)));
+      [index + 1, c.nama, c.telepon, c.email, c.alamat].forEach(v => tr.append(safeCell(v)));
       const action = document.createElement("td"); action.className = "actions-cell";
       const edit = document.createElement("button"); edit.type = "button"; edit.textContent = "Edit";
-      edit.addEventListener("click", () => beginEdit(c));
+      edit.addEventListener("click", () => beginEdit(c, index + 1));
       const del = document.createElement("button"); del.type = "button"; del.textContent = "Hapus"; del.className = "secondary";
       del.addEventListener("click", () => deleteCustomer(c.id, c.nama));
       action.append(edit, del); tr.append(action); tbody.append(tr);
@@ -76,10 +76,10 @@ async function loadManageCustomers(search = "") {
     td.colSpan = 6; tr.append(td); tbody.append(tr); showMessage("manageMessage", e.message, true);
   }
 }
-function beginEdit(customer) {
+function beginEdit(customer, displayNo) {
   document.getElementById("customerId").value = customer.id;
   ["nama","telepon","email","alamat"].forEach(key => document.getElementById(key).value = customer[key] ?? "");
-  document.getElementById("formTitle").textContent = `Edit Pelanggan #${customer.id}`;
+  document.getElementById("formTitle").textContent = `Edit Pelanggan #${displayNo ?? customer.id}`;
   document.getElementById("saveButton").textContent = "Simpan Perubahan";
   document.getElementById("cancelEdit").hidden = false;
   showMessage("formMessage", "Mode edit aktif. Ubah data lalu simpan.");
