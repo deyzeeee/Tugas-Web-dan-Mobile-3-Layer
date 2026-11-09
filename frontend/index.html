@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Informasi Data Pelanggan</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <h1>Perusahaan Pengelola Pelanggan</h1>
+    <p>Portal Informasi Data Pelanggan</p>
+  </header>
+  <nav class="navbar">
+    <a class="active" href="index.html">Home</a><a href="#about">About</a><a href="#cara">Cara Menggunakan</a>
+    <a href="#daftarpelanggan">Daftar Pelanggan</a><a href="ManipulasiData.html">Manipulasi Data</a><a
+      href="#kontak">Kontak</a>
+  </nav>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#cara">Cara Menggunakan Website</a></li>
+        <li><a href="ManipulasiData.html">Kelola Data Pelanggan</a></li>
+      </ul>
+    </aside>
+    <main class="content">
+      <section class="hero">
+        <h2>Manajemen Data Pelanggan</h2>
+        <p>Kelola dan temukan informasi pelanggan perusahaan dalam satu tempat.</p><a class="button-link"
+          href="ManipulasiData.html">Kelola Data</a>
+      </section>
+      <section id="about" class="section">
+        <h3>Informasi Pelanggan</h3>
+        <p>Website ini digunakan untuk melihat, mencari, menambahkan, mengubah, dan menghapus data pelanggan.</p>
+      </section>
+      <section id="cara" class="section">
+        <h3>Cara Menggunakan Website</h3>
+        <div class="cards">
+          <article class="card">
+            <h4>Menambah dan Mengubah</h4>
+            <p>Buka halaman Manipulasi Data, isi seluruh kolom, lalu simpan. Untuk mengubah data, tekan tombol Edit pada
+              baris pelanggan.</p>
+          </article>
+          <article class="card">
+            <h4>Mencari Pelanggan</h4>
+            <p>Gunakan kolom pencarian pada bagian Daftar Pelanggan. Pencarian dapat berdasarkan nama atau email.</p>
+          </article>
+          <article class="card">
+            <h4>Menghapus Pelanggan</h4>
+            <p>Tekan tombol Hapus pada baris pelanggan dan konfirmasi tindakan tersebut.</p>
+          </article>
+        </div>
+      </section>
+      <section id="daftarpelanggan" class="section">
+        <h3>Daftar Pelanggan</h3>
+        <form id="homeSearchForm" class="search-form"><label for="homeSearch">Temukan pelanggan</label><input
+            type="search" id="homeSearch" placeholder="Cari nama atau email..."><button
+            type="submit">Cari</button><button type="button" class="secondary" id="resetHomeSearch">Reset</button>
+        </form>
+        <p id="homeMessage" class="message" role="status"></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Telepon</th>
+                <th>Email</th>
+                <th>Alamat</th>
+              </tr>
+            </thead>
+            <tbody id="homeCustomerRows">
+              <tr>
+                <td colspan="5">Memuat data...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><a href="ManipulasiData.html">Tampilkan dan kelola semua data pelanggan →</a></p>
+      </section>
+      <section id="kontak" class="section">
+        <h3>Kontak</h3>
+        <p>Untuk pertanyaan mengenai pengelolaan data, silakan hubungi 123-456-789.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="footer">
+    <p>&copy; 2026 Website Perusahaan</p>
+  </footer>
+</body>
+
+</html>
